@@ -1,0 +1,21 @@
+.avatar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px solid var(--gray-border);
+    padding: 2rem;
+    align-items: center;
+    text-align: center;
+  }
+  .rsp-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .round-img {
+    height: min(60vw, 15rem);
+    width: min(60vw, 15rem);
+    border-radius: 50%;
+    object-fit: cover;
+  }

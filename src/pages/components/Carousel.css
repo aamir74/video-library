@@ -1,0 +1,25 @@
+.carousel-box {
+  max-height: 450px;
+  max-width: 100%;
+}
+
+.ad-button {
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  margin-left: -45%;
+  width: 30%;
+  border-radius: 10px;
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.25;
+  transition: opacity 0.35s ease-in-out;
+}
+
+.link-icon {
+  margin-left: 5px;
+}

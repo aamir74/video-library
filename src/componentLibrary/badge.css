@@ -1,0 +1,71 @@
+.avatar-images {
+  border: 1px solid var(--gray-border);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  margin: var(--margin-width);
+  display: flex;
+}
+.avatar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.avatar-md {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+}
+.avatar-badge {
+  position: relative;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  padding: 0rem 0.5rem;
+  right: 1rem;
+  bottom: 0.5rem;
+}
+.green-dot {
+  background-color: var(--success);
+}
+.red-dot {
+  background-color: var(--danger);
+}
+
+.button_main {
+  border: 1px solid var(--gray-border);
+  border-radius: 5px;
+  margin: var(--margin-width);
+  padding: 1rem;
+  display: flex;
+}
+.action-button {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 1rem 1.5rem;
+}
+.action-button > * {
+  margin: var(--margin-width);
+}
+.badge-icon {
+  position: relative;
+}
+.badge-icon i {
+  color: var(--white);
+}
+.badge {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  font-size: 12px;
+  top: -25px;
+  right: -12px;
+  color: var(--white);
+  font-weight: 600;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+}

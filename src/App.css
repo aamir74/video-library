@@ -1,51 +1,30 @@
-.App {
-  text-align: center;
+@import "./componentLibrary/button.css";
+@import "./componentLibrary/input.css";
+@import "./componentLibrary/card.css";
+@import "./componentLibrary/text-utilities.css";
+@import "./componentLibrary/badge.css";
+@import "./componentLibrary/image.css";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
+*{
+  margin:0;
+  padding: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background-color: #D3D3D3;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #22201c;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.brand-title {
-  font-size: 3rem;
-  color: #d9d9d9;
-}
-
-.brand-title span {
-  color: #ffde59;
-}
-
-.brand-description {
-  font-size: 1.4rem;
-}
-
-.links {
-  display: flex;
-}
-
-.links a {
-  color: #d9d9d9;
-  font-size: 1.2rem;
-  margin: 1rem;
+:root {
+  --primary-color: #f7444e;
+  --secondary-color:#353B47;
+  --gray-border: #333;
+  --white: #eff1f3;
+  --avatar-letter-bg-color: #ae759f;
+  --danger: #da4577;
+  --warning: #fac739;
+  --info: #7ccce4;
+  --success: #76e2ac;
+  --margin-width: 1rem;
+  --shadow-color: rgba(2, 1, 1, 0.07);
+  --stacked-list-color: #d09bc2;
+  --margin-width: 1rem;
+  --toast-bg-color: #ae759f;
 }

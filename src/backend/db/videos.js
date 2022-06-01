@@ -6,16 +6,72 @@
 export const videos = [
   {
     _id: "Wo5dMEP_BbI",
-    title: "Awesome Video about Coding",
+    title: "Flash in Action",
+    thumbnail: "https://i.ytimg.com/vi/yMiajvLzKz0/maxresdefault.jpg",
     description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
-    creator: "Soham Shah",
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium fuga.",
+    creator: "Aamir",
+    category: "Flash",
+    uploaded_on: "01/05/2022",
   },
   {
-    _id: "F_Riqjdh2oM",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
-    creator: "Sentdex",
+    _id: "Wo5dMEP_BcI",
+    title: "Arrow in Action",
+    thumbnail: "https://i.ytimg.com/vi/yMiajvLzKz0/maxresdefault.jpg",
     description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium fuga.",
+    creator: "Aamir",
+    category: "Arrow",
+    uploaded_on: "03/07/2022",
+  },
+  {
+    _id: "Wo5dMEP_BdI",
+    title: "Flash in Action",
+    thumbnail: "https://i.ytimg.com/vi/yMiajvLzKz0/maxresdefault.jpg",
+    description:
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium fuga.",
+    creator: "Aamir",
+    category: "Flash",
+    uploaded_on: "01/05/2022",
+  },
+  {
+    _id: "Wo5dMEP_BeI",
+    title: "Flash in Action",
+    thumbnail: "https://i.ytimg.com/vi/yMiajvLzKz0/maxresdefault.jpg",
+    description:
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium fuga.",
+    creator: "Aamir",
+    category: "Flash",
+    uploaded_on: "01/05/2022",
+  },
+  {
+    _id: "Wo5dMEP_BfI",
+    title: "Flash in Action",
+    thumbnail: "https://i.ytimg.com/vi/yMiajvLzKz0/maxresdefault.jpg",
+    description:
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium fuga.",
+    creator: "Aamir",
+    category: "Flash",
+    uploaded_on: "01/05/2022",
+  },
+  {
+    _id: "Wo5dMEP_BgI",
+    title: "Flash in Action",
+    thumbnail: "https://i.ytimg.com/vi/yMiajvLzKz0/maxresdefault.jpg",
+    description:
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium fuga.",
+    creator: "Aamir",
+    category: "Flash",
+    uploaded_on: "01/05/2022",
+  },
+  {
+    _id: "Wo5dMEP_BhI",
+    title: "Flash in Action",
+    thumbnail: "https://i.ytimg.com/vi/yMiajvLzKz0/maxresdefault.jpg",
+    description:
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium fuga.",
+    creator: "Aamir",
+    category: "Flash",
+    uploaded_on: "01/05/2022",
   },
 ];
