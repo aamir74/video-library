@@ -26,7 +26,7 @@ const Navbar = () => {
         />
       </div>
       <div className="nav-icons">
-        <Link to="/cart">
+        <Link to="/like">
           <span className="badge-icon">
             <i className="fa fa-clock-o fa-lg" aria-hidden="true"></i>
             <span className="badge">3</span>

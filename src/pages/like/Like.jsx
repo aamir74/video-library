@@ -1,21 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { VideoCard } from "../../customComponent/Card/VideoCard";
-import { useFilter } from "../../hooks/context/filter-context";
-import { getAllVideos } from "../../services";
-import { getVideosData } from "../../utils/products/productHandler";
+import { getAllLikedVideos } from "../../services/videos/getAllLikedVideos";
 
-import "./VideoListing.css";
-const VideoListing = () => {
-  const { state, dispatch } = useFilter();
+const Like = () => {
   const [video, setVideo] = useState([]);
 
   const getVideos = async () => {
     try {
-      const videos = await getAllVideos();
+      const videos = await getAllLikedVideos();
       console.log({ videos });
-      if (videos.data.videos.length) {
-        console.log(state);
-        getVideosData(videos.data.videos, setVideo, state);
+      if (videos?.data?.likes?.length) {
+        setVideo(videos.data.likes);
       }
     } catch (err) {
       console.log(err);
@@ -24,7 +19,7 @@ const VideoListing = () => {
 
   useEffect(() => {
     getVideos();
-  }, [state]);
+  }, []);
 
   return (
     <div className="listing-content">
@@ -33,10 +28,14 @@ const VideoListing = () => {
             return (
               <VideoCard
                 key={el._id}
+                videoId={el._id}
                 title={el.title}
                 description={el.description}
                 thumbnail={el.thumbnail}
                 uploaded_on={el.uploaded_on}
+                trashBtn={true}
+                video={video}
+                setVideo={setVideo}
               />
             );
           })
@@ -45,4 +44,4 @@ const VideoListing = () => {
   );
 };
 
-export { VideoListing };
+export { Like };

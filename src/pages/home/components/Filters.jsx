@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { categories } from "../../backend/db/categories";
-import { useFilter } from "../../hooks/context/filter-context";
-import { getAllCategories } from "../../services/categories/getAllCategories";
+import { useFilter } from "../../../hooks/context/filter-context";
+import { getAllCategories } from "../../../services/categories/getAllCategories";
 
 import "./Filters.css";
 
