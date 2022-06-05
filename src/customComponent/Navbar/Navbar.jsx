@@ -28,17 +28,21 @@ const Navbar = () => {
       <div className="nav-icons">
         <Link to="/like">
           <span className="badge-icon">
-            <i className="fa fa-clock-o fa-lg" aria-hidden="true"></i>
-            <span className="badge">3</span>
+            <i className="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>            
           </span>
         </Link>
-        <Link to="/wishlist">
+        <Link to="/watchlist">
+          <span className="badge-icon">
+            <i className="fa fa-clock-o fa-lg" aria-hidden="true"></i>            
+          </span>
+        </Link>
+        <Link to="/playlist">
           <span className="badge-icon">
             <i className="fa fa-play-circle-o fa-lg" aria-hidden="true"></i>
-
-            <span className="badge">3</span>
+            
           </span>
         </Link>
+        
         {/* <button onClick={handleLogout} className="btn-text  btn-color">
             Log Out
           </button> */}

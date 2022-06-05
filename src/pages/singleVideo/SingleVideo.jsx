@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+
+import { addToWatchLater } from "../../services/videos/addToWatchLater";
 import { getAllLikedVideos } from "../../services/videos/getAllLikedVideos";
 import { getSingleVideo } from "../../services/videos/getSingleVideo";
 import { likeVideo } from "../../services/videos/likeVideo";
+import { removeFromWatchLater } from "../../services/videos/removeFromWatchLater";
 import { removeLikedVideo } from "../../services/videos/removeLikedVideo";
 
 import "./SingleVideo.css";
@@ -11,6 +14,7 @@ const SingleVideo = () => {
   const { videoId } = useParams();
   const [video, setVideo] = useState();
   const [like, setLike] = useState(false);
+  const [watchLater, setWatchLater] = useState(false);
   const getVideo = async () => {
     try {
       let likedVideos = await getAllLikedVideos();
@@ -32,6 +36,17 @@ const SingleVideo = () => {
       if (like) res = await removeLikedVideo(videoId);
       else res = await likeVideo(video);
       if (res.status === 201 || res.status === 200) setLike(!like);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const watchLaterHandler = async () => {
+    try {
+      let res;
+      if (watchLater) res = await removeFromWatchLater(videoId);
+      else res = await addToWatchLater(video);
+      if (res.status === 201 || res.status === 200) setWatchLater(!watchLater);
     } catch (err) {
       console.log(err);
     }
@@ -71,23 +86,8 @@ const SingleVideo = () => {
                 </span>
               </div>
               <div
-                className="active-feat"
-                // className={
-                //   singleVideo.isInWatchLater ? `active-feat` : `normal-btn`
-                // }
-                // onClick={() =>
-                // token
-                //   ? watchLaterHandler(
-                //       token,
-                //       dataDispatch,
-                //       singleVideo,
-                //       singleVideo.isInWatchLater
-                //     )
-                //   : navigate("/login", {
-                //       replace: true,
-                //       state: { from: location.pathname },
-                //     })
-                // }
+                className={watchLater ? `active-feat` : `normal-btn`}
+                onClick={watchLaterHandler}
               >
                 <span>
                   <i className="fa fa-clock-o" aria-hidden="true"></i>

@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { VideoCard } from "../../customComponent/Card/VideoCard";
-import { getAllLikedVideos } from "../../services/videos/getAllLikedVideos";
+import { getAllWatchLaterVideos } from "../../services/videos/getAllWatchLaterVideos";
 
-const Like = () => {
+const WatchLater = () => {
   const [video, setVideo] = useState([]);
 
   const getVideos = async () => {
     try {
-      const videos = await getAllLikedVideos();
+      const videos = await getAllWatchLaterVideos();
       console.log({ videos });
-      if (videos?.data?.likes?.length) {
-        setVideo(videos.data.likes);
+      if (videos?.data?.watchlater?.length) {
+        setVideo(videos.data.watchlater);
       }
     } catch (err) {
       console.log(err);
@@ -36,7 +36,7 @@ const Like = () => {
                 trashBtn={true}
                 video={video}
                 setVideo={setVideo}
-                type={"like"}
+                type={"watchlist"}
               />
             );
           })
@@ -45,4 +45,4 @@ const Like = () => {
   );
 };
 
-export { Like };
+export { WatchLater };
