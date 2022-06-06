@@ -1,0 +1,10 @@
+.playlists {
+    display: flex;
+  margin-top: 4rem;
+}
+
+.playlist-footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+}

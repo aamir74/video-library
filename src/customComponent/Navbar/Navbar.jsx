@@ -36,7 +36,7 @@ const Navbar = () => {
             <i className="fa fa-clock-o fa-lg" aria-hidden="true"></i>            
           </span>
         </Link>
-        <Link to="/playlist">
+        <Link to="/playlists">
           <span className="badge-icon">
             <i className="fa fa-play-circle-o fa-lg" aria-hidden="true"></i>
             

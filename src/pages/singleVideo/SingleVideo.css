@@ -25,6 +25,13 @@
   padding-bottom: 2rem;
 }
 
+.content-row {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
 .spv-div iframe {
   position: absolute;
   top: 0;
@@ -40,13 +47,13 @@
   width: calc(100% - 12.5rem);
 }
 
-.cta-btn {
+.action-btn {
   display: flex;
   gap: 2rem;
   margin: 1rem 0;
 }
 
-.cta-btn div {
+.action-btn div {
   font-size: 1rem;
   padding: 0.5rem;
   border-radius: 1.2rem;
@@ -56,12 +63,12 @@
 span {
   margin: 0;
 }
-.cta-btn div:hover {
+.action-btn div:hover {
   background-color: var(--primary-color);
   color: var(--white-color);
 }
 
-.cta-btn div span {
+.action-btn div span {
   display: flex;
   gap: 0.3rem;
   align-items: center;
@@ -78,27 +85,21 @@ span {
 }
 
 .vid-content-wrapper {
-  width: 70vw;
+  width: 80vw;
   margin-left: 1rem;
-}
-
-.Clear-all {
-  position: absolute;
-  right: 1rem;
-  background-color: var(--white-color);
-  padding: 0.3rem;
-  font-size: 1rem;
-  margin: 0rem 1rem;
-  cursor: pointer;
-}
-
-.Clear-all:hover {
-  background-color: var(--primary-color-light);
-  color: var(--black-color);
 }
 
 .btn-com {
   color: var(--black-color);
+}
+
+.playlist-input {
+  margin: 0.5rem;
+}
+
+.close {
+  margin: 0.5rem;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
@@ -123,11 +124,11 @@ span {
     bottom: 1rem;
   }
 
-  .cta-btn {
+  .action-btn {
     gap: 0;
   }
 
-  .cta-btn div {
+  .action-btn div {
     padding: 0.2rem;
     border-radius: 1.2rem;
     font-size: 0.8rem;
@@ -145,7 +146,7 @@ span {
     height: 40vh;
   }
 
-  .cta-btn div {
+  .action-btn div {
     padding: 0.1rem;
   }
 }

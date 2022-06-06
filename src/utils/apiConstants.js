@@ -7,4 +7,10 @@ export const apiConstants = {
   ADD_TO_WATCH_LATER: "/api/user/watchlater",
   REMOVE_FROM_WATCH_LATER: "/api/user/watchlater",
   WATCH_LATER_VIDEOS: "/api/user/watchlater",
+  ADD_PLAYLIST: "/api/user/playlists",
+  REMOVE_PLAYLIST: "/api/user/playlists",
+  GET_ALL_PLAYLIST: "/api/user/playlists",
+  ADD_VIDEO_TO_PLAYLIST: "/api/user/playlists",
+  REMOVE_VIDEO_FROM_PLAYLIST: "/api/user/playlists",
+  GET_ALL_PLAYLIST_VIDEOS: "/api/user/playlists",
 };

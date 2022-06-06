@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { FilterProvider } from "./hooks/context/filter-context";
+import { NotificationsProvider } from "reapop";
 
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <FilterProvider>
-      <App />
-    </FilterProvider>
+    <NotificationsProvider>
+      <FilterProvider>
+        <App />
+      </FilterProvider>
+    </NotificationsProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

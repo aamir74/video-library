@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { addVideoToPlaylist } from "../../services/playlist/addVideoToPlaylist";
+import { removeVideoFromPlaylist } from "../../services/playlist/removeVideoFromPlaylist";
 import { removeFromWatchLater } from "../../services/videos/removeFromWatchLater";
 import { removeLikedVideo } from "../../services/videos/removeLikedVideo";
 
@@ -14,6 +16,7 @@ const VideoCard = (props) => {
     video,
     setVideo,
     type,
+    playlistId,
   } = props;
 
   const likeHandler = async () => {
@@ -42,30 +45,44 @@ const VideoCard = (props) => {
     }
   };
 
+  const playlistHandler = async () => {
+    try {
+      let res = await removeVideoFromPlaylist(playlistId, videoId);
+      console.log(res);
+      if (res.status === 200) setVideo(res.data.playlist.videos);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <Link to={trashBtn ? `/${type}` : `/video/${videoId}`}>
-      <div className="card card-with-text">
+    <div className="card card-with-text">
+      <Link to={`/video/${videoId}`}>
         <img className="card-img" src={thumbnail} />
-        <div className="card-details">
-          <h3 className="card-text-title">{title}</h3>
-          <p className="desc ">{description}</p>
-        </div>
-        {trashBtn ? (
-          <div
-            className="card-btn"
-            onClick={() =>
-              type === "like" ? likeHandler() : watchListHandler()
-            }
-          >
-            <i className="fa fa-trash" aria-hidden="true" />
-          </div>
-        ) : (
-          <div className="card-btn">
-            <i className="fa fa-ellipsis-v" aria-hidden="true" />
-          </div>
-        )}
+      </Link>
+      <div className="card-details">
+        <h3 className="card-text-title">{title}</h3>
+        <p className="desc ">{description}</p>
       </div>
-    </Link>
+      {trashBtn ? (
+        <div
+          className="card-btn"
+          onClick={() =>
+            type === "like"
+              ? likeHandler()
+              : type === "playlist"
+              ? playlistHandler()
+              : watchListHandler()
+          }
+        >
+          <i className="fa fa-trash" aria-hidden="true" />
+        </div>
+      ) : (
+        <div className="card-btn">
+          <i className="fa fa-ellipsis-v" aria-hidden="true" />
+        </div>
+      )}
+    </div>
   );
 };
 

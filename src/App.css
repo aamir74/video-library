@@ -4,6 +4,7 @@
 @import "./componentLibrary/text-utilities.css";
 @import "./componentLibrary/badge.css";
 @import "./componentLibrary/image.css";
+@import "./componentLibrary/modal.css";
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
 *{
   margin:0;
