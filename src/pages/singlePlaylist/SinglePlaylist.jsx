@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { useNotifications } from "reapop";
 import { VideoCard } from "../../customComponent/Card/VideoCard";
 import { getPlaylists } from "../../services/playlist/getPlaylists";
 
 const SinglePlaylist = () => {
+  const { notify } = useNotifications();
   const { playlistId } = useParams();
   const [video, setVideo] = useState([]);
 
@@ -20,6 +22,15 @@ const SinglePlaylist = () => {
       } else setVideo([]);
     } catch (err) {
       console.log(err);
+      notify({
+        title: <h3>Error Occured</h3>,
+        message: <h5>Something went wrong, Please try again</h5>,
+        status: "error",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     }
   };
 

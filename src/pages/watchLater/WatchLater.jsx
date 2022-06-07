@@ -14,6 +14,15 @@ const WatchLater = () => {
       }
     } catch (err) {
       console.log(err);
+      notify({
+        title: <h3>Error Occured</h3>,
+        message: <h5>Something went wrong, Please try again</h5>,
+        status: "error",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     }
   };
 

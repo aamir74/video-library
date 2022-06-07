@@ -31,6 +31,15 @@ const SingleVideo = () => {
       if (res.data.video) setVideo(res.data.video);
     } catch (err) {
       console.log(err);
+      notify({
+        title: <h3>Error Occured</h3>,
+        message: <h5>Something went wrong, Please try again</h5>,
+        status: "error",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     }
   };
 
@@ -39,18 +48,31 @@ const SingleVideo = () => {
       let res;
       if (like) res = await removeLikedVideo(videoId);
       else res = await likeVideo(video);
-      // notify({
-      //   title: <h3> Success :)</h3>,
-      //   message: <h5>You liked the video </h5>,
-      //   status: "success",
-      //   dismissible: true,
-      //   dismissAfter: 5000,
-      //   showDismissButton: true,
-      //   position: "bottom-left",
-      // });
-      if (res.status === 201 || res.status === 200) setLike(!like);
+      if (res.status === 201 || res.status === 200) {
+        setLike(!like);
+        notify({
+          title: <h3> Success :)</h3>,
+          message: (
+            <h5>{`${like ? "Removed from " : "Added to "}`}liked videos </h5>
+          ),
+          status: "success",
+          dismissible: true,
+          dismissAfter: 5000,
+          showDismissButton: true,
+          position: "bottom-left",
+        });
+      }
     } catch (err) {
       console.log(err);
+      notify({
+        title: <h3>Error Occured</h3>,
+        message: <h5>Something went wrong, Please try again</h5>,
+        status: "error",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     }
   };
 
@@ -59,9 +81,31 @@ const SingleVideo = () => {
       let res;
       if (watchLater) res = await removeFromWatchLater(videoId);
       else res = await addToWatchLater(video);
-      if (res.status === 201 || res.status === 200) setWatchLater(!watchLater);
+      if (res.status === 201 || res.status === 200) {
+        setWatchLater(!watchLater);
+        notify({
+          title: <h3> Success :)</h3>,
+          message: (
+            <h5>{`${watchLater ? "Removed from " : "Added to "}`}watchlist </h5>
+          ),
+          status: "success",
+          dismissible: true,
+          dismissAfter: 5000,
+          showDismissButton: true,
+          position: "bottom-left",
+        });
+      }
     } catch (err) {
       console.log(err);
+      notify({
+        title: <h3>Error Occured</h3>,
+        message: <h5>Something went wrong, Please try again</h5>,
+        status: "error",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     }
   };
 
@@ -125,7 +169,8 @@ const SingleVideo = () => {
                 </div>
               </div>
 
-              <h2>Description</h2><br />
+              <h2>Description</h2>
+              <br />
               <p>{video.description}</p>
             </div>
           </div>

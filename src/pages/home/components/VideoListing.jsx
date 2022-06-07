@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNotifications } from "reapop";
 import { VideoCard } from "../../../customComponent/Card/VideoCard";
 import { useFilter } from "../../../hooks/context/filter-context";
 import { getAllVideos } from "../../../services";
@@ -6,6 +7,7 @@ import { getVideosData } from "../../../utils/products/productHandler";
 
 import "./VideoListing.css";
 const VideoListing = () => {
+  const { notify } = useNotifications();
   const { state, dispatch } = useFilter();
   const [video, setVideo] = useState([]);
 
@@ -19,6 +21,15 @@ const VideoListing = () => {
       }
     } catch (err) {
       console.log(err);
+      notify({
+        title: <h3>Error Occured</h3>,
+        message: <h5>Something went wrong, Please try again</h5>,
+        status: "error",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     }
   };
 

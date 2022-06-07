@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNotifications } from "reapop";
 import { addPlaylist } from "../../../services/playlist/addPlaylist";
 import { addVideoToPlaylist } from "../../../services/playlist/addVideoToPlaylist";
 import { getPlaylists } from "../../../services/playlist/getPlaylists";
+import { removeVideoFromPlaylist } from "../../../services/playlist/removeVideoFromPlaylist";
 
 const PlaylistModal = ({ setModal, video }) => {
+  const { notify } = useNotifications();
   const [playlistName, setPlaylistName] = useState("");
   const [playlists, setPlaylists] = useState([]);
   const handleAddPlaylist = async () => {
@@ -18,9 +21,27 @@ const PlaylistModal = ({ setModal, video }) => {
       if (res.status === 201) {
         setPlaylists(res.data.playlists);
         setPlaylistName("");
+        notify({
+          title: <h3> Success :)</h3>,
+          message: <h5>Playlist added</h5>,
+          status: "success",
+          dismissible: true,
+          dismissAfter: 5000,
+          showDismissButton: true,
+          position: "bottom-left",
+        });
       }
     } catch (err) {
       console.log(err);
+      notify({
+        title: <h3>Error Occured</h3>,
+        message: <h5>Something went wrong, Please try again</h5>,
+        status: "error",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     }
   };
 
@@ -33,6 +54,15 @@ const PlaylistModal = ({ setModal, video }) => {
       }
     } catch (err) {
       console.log(err);
+      notify({
+        title: <h3>Error Occured</h3>,
+        message: <h5>Something went wrong, Please try again</h5>,
+        status: "error",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     }
   };
 
@@ -40,15 +70,33 @@ const PlaylistModal = ({ setModal, video }) => {
     try {
       let res;
       if (e.target.checked) res = await addVideoToPlaylist(playlistId, video);
-      else res = await addVideoToPlaylist(playlistId, video._id);
+      else res = await removeVideoFromPlaylist(playlistId, video._id);
       const updatedPlaylist = playlists.map((item) =>
         item._id === res.data.playlist._id
           ? { ...item, videos: res.data.playlist.videos }
           : item
       );
       setPlaylists(updatedPlaylist);
+      notify({
+        title: <h3> Success :)</h3>,
+        message: <h5>Playlist Updated</h5>,
+        status: "success",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     } catch (err) {
       console.log(err);
+      notify({
+        title: <h3>Error Occured</h3>,
+        message: <h5>Something went wrong, Please try again</h5>,
+        status: "error",
+        dismissible: true,
+        dismissAfter: 5000,
+        showDismissButton: true,
+        position: "bottom-left",
+      });
     }
   };
 
