@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import "./Authentication.css";
-import { Input } from "../../customComponents/Form/Input";
+import { useDispatch } from "react-redux";
+
+import { Input } from "../../customComponent/Form/Input";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { signupFormChangeHandler, signupFormSubmitHandler } from "../../utils";
 import { useNotifications } from "reapop";
-import { useAuth } from "../../hooks";
+import { signup } from "../../services/auth/signup";
+import { setUserToken } from "../../redux/auth/AuthSlice";
+import CookieHelper from "../../utils/cookies/cookieHelper";
 
+import "./Authentication.css";
 
 const Signup = () => {
   const { notify } = useNotifications();
   const navigate = useNavigate();
-  const { authState, authDispatch } = useAuth();
+  const authDispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -41,11 +44,14 @@ const Signup = () => {
       .max(10, "Must be 10 characters")
       .required("Required"),
   });
+
   const handleSubmit = async (form) => {
     try {
-      const signup = await signupFormSubmitHandler(form.data,authDispatch);
-      console.log(signup)
-      if (signup?.data?.encodedToken) {
+      const res = await signup(form.data);
+      const cookieHelper = new CookieHelper();
+      cookieHelper.setCookie({ auth_token: res.data.encodedToken }, null, 2);
+      authDispatch(setUserToken(res.data.encodedToken));
+      if (res?.data?.encodedToken) {
         notify({
           title: <h3> Success :)</h3>,
           message: <h5>Signed in successfully </h5>,
@@ -83,7 +89,8 @@ const Signup = () => {
     }
   };
   const handleChange = async (e) =>
-    signupFormChangeHandler(e, formData, setFormData);
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    
   return (
     <div className="form-container">
       <div className="auth-card">

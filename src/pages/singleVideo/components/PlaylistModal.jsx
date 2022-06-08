@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNotifications } from "reapop";
 import { addPlaylist } from "../../../services/playlist/addPlaylist";
 import { addVideoToPlaylist } from "../../../services/playlist/addVideoToPlaylist";
@@ -7,8 +8,11 @@ import { removeVideoFromPlaylist } from "../../../services/playlist/removeVideoF
 
 const PlaylistModal = ({ setModal, video }) => {
   const { notify } = useNotifications();
+  const { auth } = useSelector((store) => store.userData);
+
   const [playlistName, setPlaylistName] = useState("");
   const [playlists, setPlaylists] = useState([]);
+
   const handleAddPlaylist = async () => {
     try {
       if (!playlistName) return;
@@ -17,7 +21,7 @@ const PlaylistModal = ({ setModal, video }) => {
         if (item.title === playlistName) playlistAlreadyExist = true;
       });
       if (playlistAlreadyExist) return;
-      const res = await addPlaylist({ title: playlistName });
+      const res = await addPlaylist({ title: playlistName }, auth);
       if (res.status === 201) {
         setPlaylists(res.data.playlists);
         setPlaylistName("");
@@ -47,7 +51,7 @@ const PlaylistModal = ({ setModal, video }) => {
 
   const getAllPlaylists = async () => {
     try {
-      const res = await getPlaylists();
+      const res = await getPlaylists(auth);
 
       if (res?.data?.playlists?.length) {
         setPlaylists(res.data.playlists);
@@ -69,8 +73,9 @@ const PlaylistModal = ({ setModal, video }) => {
   const handlePlaylistAction = async (e, playlistId) => {
     try {
       let res;
-      if (e.target.checked) res = await addVideoToPlaylist(playlistId, video);
-      else res = await removeVideoFromPlaylist(playlistId, video._id);
+      if (e.target.checked)
+        res = await addVideoToPlaylist(playlistId, video, auth);
+      else res = await removeVideoFromPlaylist(playlistId, video._id, auth);
       const updatedPlaylist = playlists.map((item) =>
         item._id === res.data.playlist._id
           ? { ...item, videos: res.data.playlist.videos }

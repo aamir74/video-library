@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useNotifications } from "reapop";
 import { VideoCard } from "../../customComponent/Card/VideoCard";
@@ -6,13 +7,13 @@ import { getPlaylists } from "../../services/playlist/getPlaylists";
 
 const SinglePlaylist = () => {
   const { notify } = useNotifications();
+  const { auth } = useSelector((store) => store.userData);
   const { playlistId } = useParams();
   const [video, setVideo] = useState([]);
 
   const getAllPlaylists = async () => {
     try {
-      const res = await getPlaylists();
-      console.log(res);
+      const res = await getPlaylists(auth);
       const playlistDetail = res.data.playlists.find(
         (item) => item._id === playlistId
       );

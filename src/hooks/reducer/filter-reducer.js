@@ -1,5 +1,4 @@
 const filterReducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "SORT_BY_LATEST":
       return { ...state, sortBy: action.type };

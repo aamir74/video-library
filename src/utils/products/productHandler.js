@@ -7,7 +7,6 @@ const getVideosData = (data, setVideos, state) => {
   videosList = sortFilter(videosList, state.sortBy);
   videosList = searchFilter(videosList, state.search);
   videosList = categoryFilter(videosList, state.category);
-  console.log(videosList);
   setVideos(videosList);
 };
 export { getVideosData };

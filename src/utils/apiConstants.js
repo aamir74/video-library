@@ -1,4 +1,6 @@
 export const apiConstants = {
+  LOGIN: "/api/auth/login",
+  SIGNUP: "/api/auth/signup",
   GET_ALL_VIDEOS: "/api/videos",
   GET_ALL_CATEGORIES: "/api/categories",
   GET_SINGLE_VIDEO: "/api/video",

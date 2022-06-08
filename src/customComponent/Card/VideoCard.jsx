@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNotifications } from "reapop";
 import { addVideoToPlaylist } from "../../services/playlist/addVideoToPlaylist";
@@ -20,13 +21,12 @@ const VideoCard = (props) => {
     type,
     playlistId,
   } = props;
-
+  const { auth } = useSelector((store) => store.userData);
   const likeHandler = async () => {
     try {
-      const res = await removeLikedVideo(videoId);
+      const res = await removeLikedVideo(videoId, auth);
       if (res.status === 200) {
         const filterVideo = video.filter((ele) => ele._id !== videoId);
-        console.log(filterVideo);
         setVideo(filterVideo);
         notify({
           title: <h3> Success :)</h3>,
@@ -54,7 +54,7 @@ const VideoCard = (props) => {
 
   const watchListHandler = async () => {
     try {
-      const res = await removeFromWatchLater(videoId);
+      const res = await removeFromWatchLater(videoId, auth);
       if (res.status === 200) {
         const filterVideo = video.filter((ele) => ele._id !== videoId);
         console.log(filterVideo);
@@ -85,8 +85,7 @@ const VideoCard = (props) => {
 
   const playlistHandler = async () => {
     try {
-      let res = await removeVideoFromPlaylist(playlistId, videoId);
-      console.log(res);
+      let res = await removeVideoFromPlaylist(playlistId, videoId, auth);
       if (res.status === 200) {
         setVideo(res.data.playlist.videos);
         notify({

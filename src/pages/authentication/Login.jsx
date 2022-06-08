@@ -3,23 +3,25 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useNotifications } from "reapop";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Input } from "../../customComponents/Form/Input";
-import { loginFormChangeHandler, loginFormSubmitHandler } from "../../utils";
+import { Input } from "../../customComponent/Form/Input";
 
 import "./Authentication.css";
-import { useAuth } from "../../hooks";
-import { useNotifications } from "reapop";
+import { login } from "../../services/auth/login";
+import { setUserToken } from "../../redux/auth/AuthSlice";
+import CookieHelper from "../../utils/cookies/cookieHelper";
 
 const Login = () => {
   const navigate = useNavigate();
   const { notify } = useNotifications();
+  const authDispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const { authState, authDispatch } = useAuth();
 
   const validator = Yup.object({
     email: Yup.string()
@@ -30,11 +32,16 @@ const Login = () => {
       .max(15, "Must be 6 to 15 characters")
       .required("Required"),
   });
+
   const handleSubmit = async (form) => {
     try {
-      const login = await loginFormSubmitHandler(form.data, authDispatch);
-      console.log(login);
-      if (login?.data?.encodedToken) {
+      const res = await login(form.data);
+      console.log(res);
+      if (res?.data?.encodedToken) {
+        //set token to redux
+        const cookieHelper = new CookieHelper();
+        cookieHelper.setCookie({ auth_token: res.data.encodedToken }, null, 2);
+        authDispatch(setUserToken(res.data.encodedToken));
         notify({
           title: <h3> Success :)</h3>,
           message: <h5>Logged in successfully </h5>,
@@ -71,8 +78,8 @@ const Login = () => {
       navigate("/login");
     }
   };
-  const handleChange = async (e) =>
-    loginFormChangeHandler(e, formData, setFormData);
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   return (
     <div className="form-container">
       <div className="auth-card">

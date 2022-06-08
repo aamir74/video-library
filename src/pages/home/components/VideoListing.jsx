@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNotifications } from "reapop";
 import { VideoCard } from "../../../customComponent/Card/VideoCard";
-import { useFilter } from "../../../hooks/context/filter-context";
 import { getAllVideos } from "../../../services";
 import { getVideosData } from "../../../utils/products/productHandler";
 
 import "./VideoListing.css";
 const VideoListing = () => {
   const { notify } = useNotifications();
-  const { state, dispatch } = useFilter();
+  const state = useSelector((store) => store.filters);
   const [video, setVideo] = useState([]);
 
   const getVideos = async () => {
     try {
       const videos = await getAllVideos();
-      console.log({ videos });
       if (videos.data.videos.length) {
-        console.log(state);
         getVideosData(videos.data.videos, setVideo, state);
       }
     } catch (err) {

@@ -8,7 +8,6 @@ const WatchLater = () => {
   const getVideos = async () => {
     try {
       const videos = await getAllWatchLaterVideos();
-      console.log({ videos });
       if (videos?.data?.watchlater?.length) {
         setVideo(videos.data.watchlater);
       }

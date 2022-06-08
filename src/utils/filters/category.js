@@ -1,5 +1,4 @@
 const categoryFilter = (data, category) => {
-  console.log(category, data);
   if (category.length) {
     const categoryFilteredData = data.filter((item) =>
       category.includes(item.category)

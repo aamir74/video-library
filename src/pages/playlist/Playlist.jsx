@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNotifications } from "reapop";
 import { getPlaylists } from "../../services/playlist/getPlaylists";
@@ -8,11 +9,12 @@ import "./Playlist.css";
 
 const Playlist = () => {
   const { notify } = useNotifications();
+  const { auth } = useSelector((store) => store.userData);
   const [playlists, setPlaylists] = useState([]);
+
   const getAllPlaylists = async () => {
     try {
-      const res = await getPlaylists();
-      console.log(res);
+      const res = await getPlaylists(auth);
       if (res?.data?.playlists?.length) {
         setPlaylists(res.data.playlists);
       }
@@ -32,8 +34,7 @@ const Playlist = () => {
 
   const deleteHandler = async (playlistId) => {
     try {
-      const res = await removePlaylist(playlistId);
-      console.log(res.data.playlists.length);
+      const res = await removePlaylist(playlistId, auth);
       if (res?.data?.playlists?.length) setPlaylists(res.data.playlists);
       else setPlaylists([]);
       notify({

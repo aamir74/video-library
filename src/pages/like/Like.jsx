@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNotifications } from "reapop";
 import { VideoCard } from "../../customComponent/Card/VideoCard";
 import { getAllLikedVideos } from "../../services/videos/getAllLikedVideos";
 
 const Like = () => {
   const { notify } = useNotifications();
+  const { auth } = useSelector((store) => store.userData);
   const [video, setVideo] = useState([]);
 
   const getVideos = async () => {
     try {
-      const videos = await getAllLikedVideos();
+      const videos = await getAllLikedVideos(auth);
       console.log({ videos });
       if (videos?.data?.likes?.length) {
         setVideo(videos.data.likes);

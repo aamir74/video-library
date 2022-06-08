@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
 import { useNotifications } from "reapop";
-import { useFilter } from "../../../hooks/context/filter-context";
+import { useDispatch, useSelector } from "react-redux";
+
 import { getAllCategories } from "../../../services/categories/getAllCategories";
+import {
+  category,
+  clear,
+  clearSort,
+  sortByLatest,
+} from "../../../redux/auth/FilterSlice";
 
 import "./Filters.css";
 
 const Filters = () => {
   const { notify } = useNotifications();
-  const { state, dispatch } = useFilter();
+  const dispatch = useDispatch();
+  const state = useSelector((store) => store.filters);
   const [categories, setCategories] = useState([]);
   const [dateFilter, setDateFilter] = useState(true);
 
   const getCategories = async () => {
     try {
       const category = await getAllCategories();
-      console.log({ category });
       if (category.data.categories.length) {
         setCategories(category.data.categories);
       }
@@ -48,9 +55,11 @@ const Filters = () => {
                     ? "active-category-chip"
                     : ""
                 }`}
-                onClick={() =>
-                  dispatch({ type: "CATEGORY", category: el.categoryName })
-                }
+                onClick={() => {
+                  dispatch(
+                    category({ type: "CATEGORY", category: el.categoryName })
+                  );
+                }}
               >
                 {el.categoryName}
               </div>
@@ -62,7 +71,7 @@ const Filters = () => {
           <>
             <div
               onClick={() => {
-                dispatch({ type: "SORT_BY_LATEST" });
+                dispatch(sortByLatest({ type: "SORT_BY_LATEST" }));
                 setDateFilter(false);
               }}
             >
@@ -73,7 +82,7 @@ const Filters = () => {
         ) : (
           <span
             onClick={() => {
-              dispatch({ type: "CLEAR_SORT" });
+              dispatch(clearSort({ type: "CLEAR_SORT" }));
               setDateFilter(true);
             }}
           >

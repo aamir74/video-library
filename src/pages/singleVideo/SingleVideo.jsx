@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useNotifications } from "reapop";
 
@@ -19,9 +20,11 @@ const SingleVideo = () => {
   const [like, setLike] = useState(false);
   const [modal, setModal] = useState(false);
   const [watchLater, setWatchLater] = useState(false);
+  const { auth } = useSelector((store) => store.userData);
+
   const getVideo = async () => {
     try {
-      let likedVideos = await getAllLikedVideos();
+      let likedVideos = await getAllLikedVideos(auth);
       likedVideos = likedVideos.data.likes;
       const check =
         likedVideos.length !== 0 &&
@@ -46,8 +49,9 @@ const SingleVideo = () => {
   const LikeHandler = async () => {
     try {
       let res;
-      if (like) res = await removeLikedVideo(videoId);
-      else res = await likeVideo(video);
+
+      if (like) res = await removeLikedVideo(videoId, auth);
+      else res = await likeVideo(video, auth);
       if (res.status === 201 || res.status === 200) {
         setLike(!like);
         notify({
@@ -79,8 +83,8 @@ const SingleVideo = () => {
   const watchLaterHandler = async () => {
     try {
       let res;
-      if (watchLater) res = await removeFromWatchLater(videoId);
-      else res = await addToWatchLater(video);
+      if (watchLater) res = await removeFromWatchLater(videoId, auth);
+      else res = await addToWatchLater(video, auth);
       if (res.status === 201 || res.status === 200) {
         setWatchLater(!watchLater);
         notify({
