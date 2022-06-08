@@ -24,32 +24,25 @@ const SingleVideo = () => {
 
   const getVideo = async () => {
     try {
-      let likedVideos = await getAllLikedVideos(auth);
-      likedVideos = likedVideos.data.likes;
-      const check =
-        likedVideos.length !== 0 &&
-        likedVideos?.find((video) => video._id === videoId);
-      if (check) setLike(true);
+      if (auth) {
+        let likedVideos = await getAllLikedVideos(auth);
+        likedVideos = likedVideos.data.likes;
+        const check =
+          likedVideos.length !== 0 &&
+          likedVideos?.find((video) => video._id === videoId);
+        if (check) setLike(true);
+      }
       const res = await getSingleVideo(videoId);
       if (res.data.video) setVideo(res.data.video);
     } catch (err) {
       console.log(err);
-      notify({
-        title: <h3>Error Occured</h3>,
-        message: <h5>Something went wrong, Please try again</h5>,
-        status: "error",
-        dismissible: true,
-        dismissAfter: 5000,
-        showDismissButton: true,
-        position: "bottom-left",
-      });
     }
   };
 
   const LikeHandler = async () => {
     try {
+      if (!auth) throw { message: "User not loggeg in" };
       let res;
-
       if (like) res = await removeLikedVideo(videoId, auth);
       else res = await likeVideo(video, auth);
       if (res.status === 201 || res.status === 200) {
@@ -70,7 +63,7 @@ const SingleVideo = () => {
       console.log(err);
       notify({
         title: <h3>Error Occured</h3>,
-        message: <h5>Something went wrong, Please try again</h5>,
+        message: <h5>Please Login to like a video</h5>,
         status: "error",
         dismissible: true,
         dismissAfter: 5000,
@@ -82,6 +75,7 @@ const SingleVideo = () => {
 
   const watchLaterHandler = async () => {
     try {
+      if (!auth) throw { message: "User not loggeg in" };
       let res;
       if (watchLater) res = await removeFromWatchLater(videoId, auth);
       else res = await addToWatchLater(video, auth);
@@ -103,7 +97,7 @@ const SingleVideo = () => {
       console.log(err);
       notify({
         title: <h3>Error Occured</h3>,
-        message: <h5>Something went wrong, Please try again</h5>,
+        message: <h5>Please Login to add video to watch later</h5>,
         status: "error",
         dismissible: true,
         dismissAfter: 5000,

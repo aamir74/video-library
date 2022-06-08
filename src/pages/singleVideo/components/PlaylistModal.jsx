@@ -15,6 +15,7 @@ const PlaylistModal = ({ setModal, video }) => {
 
   const handleAddPlaylist = async () => {
     try {
+      if (!auth) throw { message: "User not loggeg in" };
       if (!playlistName) return;
       let playlistAlreadyExist = false;
       playlists.map((item) => {
@@ -39,7 +40,7 @@ const PlaylistModal = ({ setModal, video }) => {
       console.log(err);
       notify({
         title: <h3>Error Occured</h3>,
-        message: <h5>Something went wrong, Please try again</h5>,
+        message: <h5>Please Login to add to playlist</h5>,
         status: "error",
         dismissible: true,
         dismissAfter: 5000,
@@ -51,6 +52,7 @@ const PlaylistModal = ({ setModal, video }) => {
 
   const getAllPlaylists = async () => {
     try {
+      if (!auth) return;
       const res = await getPlaylists(auth);
 
       if (res?.data?.playlists?.length) {
@@ -58,15 +60,6 @@ const PlaylistModal = ({ setModal, video }) => {
       }
     } catch (err) {
       console.log(err);
-      notify({
-        title: <h3>Error Occured</h3>,
-        message: <h5>Something went wrong, Please try again</h5>,
-        status: "error",
-        dismissible: true,
-        dismissAfter: 5000,
-        showDismissButton: true,
-        position: "bottom-left",
-      });
     }
   };
 

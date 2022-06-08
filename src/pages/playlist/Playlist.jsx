@@ -14,6 +14,7 @@ const Playlist = () => {
 
   const getAllPlaylists = async () => {
     try {
+      if (!auth) throw { message: "User not loggeg in" };
       const res = await getPlaylists(auth);
       if (res?.data?.playlists?.length) {
         setPlaylists(res.data.playlists);
@@ -22,7 +23,7 @@ const Playlist = () => {
       console.log(err);
       notify({
         title: <h3>Error Occured</h3>,
-        message: <h5>Something went wrong, Please try again</h5>,
+        message: <h5>Login to check Playlists</h5>,
         status: "error",
         dismissible: true,
         dismissAfter: 5000,

@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNotifications } from "reapop";
 import { VideoCard } from "../../customComponent/Card/VideoCard";
 import { getAllWatchLaterVideos } from "../../services/videos/getAllWatchLaterVideos";
 
 const WatchLater = () => {
+  const { notify } = useNotifications();
   const [video, setVideo] = useState([]);
+  const { auth } = useSelector((store) => store.userData);
 
   const getVideos = async () => {
     try {
-      const videos = await getAllWatchLaterVideos();
+      if (!auth) throw { message: "User not loggeg in" };
+      const videos = await getAllWatchLaterVideos(auth);
       if (videos?.data?.watchlater?.length) {
         setVideo(videos.data.watchlater);
       }
@@ -15,7 +20,7 @@ const WatchLater = () => {
       console.log(err);
       notify({
         title: <h3>Error Occured</h3>,
-        message: <h5>Something went wrong, Please try again</h5>,
+        message: <h5>Login to check watchlist</h5>,
         status: "error",
         dismissible: true,
         dismissAfter: 5000,

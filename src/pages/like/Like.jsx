@@ -11,6 +11,7 @@ const Like = () => {
 
   const getVideos = async () => {
     try {
+      if (!auth) throw { message: "User not loggeg in" };
       const videos = await getAllLikedVideos(auth);
       console.log({ videos });
       if (videos?.data?.likes?.length) {
@@ -20,7 +21,7 @@ const Like = () => {
       console.log(err);
       notify({
         title: <h3>Error Occured</h3>,
-        message: <h5>Something went wrong, Please try again</h5>,
+        message: <h5>Please Login to see liked videos</h5>,
         status: "error",
         dismissible: true,
         dismissAfter: 5000,
