@@ -8,7 +8,7 @@ import {
   clear,
   clearSort,
   sortByLatest,
-} from "../../../redux/auth/FilterSlice";
+} from "../../../redux/slices/FilterSlice";
 
 import "./Filters.css";
 

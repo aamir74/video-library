@@ -7,9 +7,9 @@ import { useFilter } from "../../hooks/context/filter-context";
 import CookieHelper from "../../utils/cookies/cookieHelper";
 
 import "./Navbar.css";
-import { removeUserToken } from "../../redux/auth/AuthSlice";
+import { removeUserToken } from "../../redux/slices/AuthSlice";
 import { useNotifications } from "reapop";
-import { search } from "../../redux/auth/FilterSlice";
+import { search } from "../../redux/slices/FilterSlice";
 const Navbar = () => {
   const { notify } = useNotifications();
   const navigate = useNavigate();
@@ -53,17 +53,17 @@ const Navbar = () => {
         />
       </div>
       <div className="nav-icons">
-        <Link to="/like">
+        <Link to="/like" title="Liked videos">
           <span className="badge-icon">
             <i className="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
           </span>
         </Link>
-        <Link to="/watchlist">
+        <Link to="/watchlist" title="Watch later">
           <span className="badge-icon">
             <i className="fa fa-clock-o fa-lg" aria-hidden="true"></i>
           </span>
         </Link>
-        <Link to="/playlists">
+        <Link to="/playlists" title="Playlists">
           <span className="badge-icon">
             <i className="fa fa-play-circle-o fa-lg" aria-hidden="true"></i>
           </span>

@@ -135,9 +135,10 @@ const VideoCard = (props) => {
           <i className="fa fa-trash" aria-hidden="true" />
         </div>
       ) : (
-        <div className="card-btn">
-          <i className="fa fa-ellipsis-v" aria-hidden="true" />
-        </div>
+        <></>
+        // <div className="card-btn">
+        //   <i className="fa fa-ellipsis-v" aria-hidden="true" />
+        // </div>
       )}
     </div>
   );

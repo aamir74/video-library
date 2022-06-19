@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useNotifications } from "reapop";
 import { signup } from "../../services/auth/signup";
-import { setUserToken } from "../../redux/auth/AuthSlice";
+import { setUserToken } from "../../redux/slices/AuthSlice";
 import CookieHelper from "../../utils/cookies/cookieHelper";
 
 import "./Authentication.css";

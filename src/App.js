@@ -15,7 +15,7 @@ import { Login } from "./pages/authentication/Login";
 import { Signup } from "./pages/authentication/Signup";
 import CookieHelper from "./utils/cookies/cookieHelper";
 import "./App.css";
-import { setUserToken } from "./redux/auth/AuthSlice";
+import { setUserToken } from "./redux/slices/AuthSlice";
 
 const App = () => {
   const authDispatch = useDispatch();

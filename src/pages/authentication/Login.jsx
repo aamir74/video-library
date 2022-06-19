@@ -10,7 +10,7 @@ import { Input } from "../../customComponent/Form/Input";
 
 import "./Authentication.css";
 import { login } from "../../services/auth/login";
-import { setUserToken } from "../../redux/auth/AuthSlice";
+import { setUserToken } from "../../redux/slices/AuthSlice";
 import CookieHelper from "../../utils/cookies/cookieHelper";
 
 const Login = () => {
