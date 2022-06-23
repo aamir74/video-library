@@ -119,7 +119,7 @@ const VideoCard = (props) => {
       </Link>
       <div className="card-details">
         <h3 className="card-text-title">{title}</h3>
-        <p className="desc ">{description}</p>
+        <p className="desc">{description}</p>
       </div>
       {trashBtn ? (
         <div
@@ -132,13 +132,10 @@ const VideoCard = (props) => {
               : watchListHandler()
           }
         >
-          <i className="fa fa-trash" aria-hidden="true" />
+          <i className="fa fa-trash" aria-hidden="true" title="delete" />
         </div>
       ) : (
-        <></>
-        // <div className="card-btn">
-        //   <i className="fa fa-ellipsis-v" aria-hidden="true" />
-        // </div>
+        <></>       
       )}
     </div>
   );

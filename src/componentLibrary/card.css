@@ -75,6 +75,8 @@
 }
 .desc {
   padding-bottom: 0.3rem;
+  color:var(--secondary-color);
+  font-size: small;
 }
 .bold {
   font-weight: bold;

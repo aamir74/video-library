@@ -130,6 +130,22 @@ const Login = () => {
                 </button>
               </div>
               <br />
+              <div
+                onClick={() =>
+                  setFormData({
+                    email: "aamir@gmail.com",
+                    password: "123456",
+                  })
+                }
+              >
+                <button
+                  className="btn-text btn-primary btn-bg-color"
+                  type="submit"
+                >
+                  Guest Login
+                </button>
+              </div>
+              <br />
               <p>
                 Not Registered? <Link to="/signup">Sign up</Link>
               </p>
